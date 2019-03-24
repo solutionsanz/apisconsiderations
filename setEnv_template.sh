@@ -1,0 +1,13 @@
+export identityDomain=identity.us-ashburn-1.oraclecloud.com
+export coreServicesDomain=iaas.us-ashburn-1.oraclecloud.com
+export databaseServicesDomain=database.us-ashburn-1.oraclecloud.com
+export tenancyId=ocid1.tenancy.oc1..aaaaaaaa7xxx.............
+export compartmentId=ocid1.compartment.oc1..aaaaaaaa4xxx.............
+export apiUserId=ocid1.user.oc1..aaaaaaaapgr7xxx.............
+export publicKeyFingerprint=9e:29:39:59:2b:xxx.............
+export pathToKey=./ssh/id_rsa_pri.pem
+export dbpasswd=welcome1
+export SMS_SERVER=lb.xxxx.com
+export SMS_PORT=443
+export SMS_PATH=/notifications/sms
+export VOICE_PATH=/notifications/voice
