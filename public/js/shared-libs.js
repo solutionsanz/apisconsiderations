@@ -122,7 +122,7 @@ function sendJoke() {
     document.getElementById("sendJokeLabel").innerHTML = "Sending...";
 
     // var server = "https://icanhazdadjoke.com";
-    var server = "https://apip.oracleau.cloud"
+    var server = "https://lb.oracleau.cloud"
     var apipUri = "/api/jokes/jokes/";
 
     // var server = "http://10.0.0.55:3000"
@@ -242,4 +242,125 @@ function getAPISynch(repid) {
 
     //alert("customername is [" + customername + "]");
     return customername;
+}
+
+
+window.onload = function () {
+
+    console.log("Adding event on myIframe");
+
+    document.getElementById('myIframe').src = "/" + getAPISpec();
+}
+
+window.spec = "";
+
+function getAPISpec() {
+
+    if (window.spec != undefined && window.spec != null && window.spec != "") {
+        return window.spec;
+    }
+
+    var hash = [];
+    var uri = "";
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+
+        hash = hashes[i].split('=');
+
+        switch (hash[0]) {
+
+            case "spec":
+
+                uri = "?spec=" + hash[1];
+
+                continue;
+
+            case "s":
+
+                uri += "&s=" + hash[1];
+
+                continue;
+
+            case "ro":
+
+                uri += "&ro=" + hash[1];
+
+                continue;
+
+            case "bu":
+
+                uri += "&bu=" + hash[1];
+
+                continue;
+
+
+        }
+    }
+
+    console.log("URI found is [" + uri + "]");
+
+    //Setting global variable:
+    window.spec = uri;
+    return window.spec;
+}
+
+function setSecurity() {
+
+    var s = document.getElementById('s').checked;
+    console.log("Security switch changed to [" + s + "]");
+
+    var uri = getAPISpec();
+
+
+    switch (s) {
+
+        case true:
+
+            uri = uri.replace(/s=.+?(?=&)/gi, 's=on');
+            window.spec = uri;
+            break;
+
+        case false:
+
+            uri = uri.replace(/s=.+?(?=&)/gi, 's=off');
+            window.spec = uri;
+            break;
+    }
+
+
+    console.log("URI to call is [" + uri + "]");
+
+
+    document.getElementById('myIframe').src = "/" + uri;
+
+}
+
+function setReadOnly() {
+
+    var ro = document.getElementById('ro').checked;
+    console.log("Read Only switch changed to [" + ro + "]");
+
+    var uri = getAPISpec();
+
+
+    switch (ro) {
+
+        case true:
+
+            uri = uri.replace(/ro=.+?(?=&)/gi, 'ro=on');
+            window.spec = uri;
+            break;
+
+        case false:
+
+            uri = uri.replace(/ro=.+?(?=&)/gi, 'ro=off');
+            window.spec = uri;
+            break;
+    }
+
+
+    console.log("URI to call is [" + uri + "]");
+
+    document.getElementById('myIframe').src = "/" + uri;
+
 }
