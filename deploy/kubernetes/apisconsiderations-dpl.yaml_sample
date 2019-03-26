@@ -2,26 +2,26 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: apis4harnessdeployment
+  name: apisconsiderationsdeployment
   labels:
-    app: apis4harness
+    app: apisconsiderations
     microservice: app
-  namespace: apis4harness
+  namespace: apisconsiderations
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: apis4harness
+      app: apisconsiderations
       microservice: app
   template:
     metadata:
       labels:
-        app: apis4harness
+        app: apisconsiderations
         microservice: app
         version: v0.0.1
     spec:
       containers:
-      - name: apis4harness
+      - name: apisconsiderations
         image: ENTER_IMAGE_TAG_NAME_HERE
         env:
         - name: API_GW_ENABLED
@@ -29,7 +29,7 @@ spec:
         - name: API_GW_SERVER
           value: "lbaas.xxxx.xxx"
         - name: API_GW_BASEURL
-          value: "/apis4harness"
+          value: "/apisconsiderations"
         - name: identityDomain
           value: "identity.xx-xxxxxxx-1.oraclecloud.com"
         - name: coreServicesDomain
