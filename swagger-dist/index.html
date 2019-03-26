@@ -79,25 +79,27 @@
   <script src="./swagger-ui-bundle.js"> </script>
   <script src="./swagger-ui-standalone-preset.js"> </script>
 
-  <script src="./tempConfig.js"> </script>
+  <!-- script src="./tempConfig.js"> </script -->
 
   <script>
-    var API_GW_ENABLED = localConfig.API_GW_ENABLED;
+    // var API_GW_ENABLED = localConfig.API_GW_ENABLED;
 
 
     var prefixPath = "";
-    //var prefixPath = "/apisconsiderations";
 
-    console.log("API_GW_ENABLED is [" + API_GW_ENABLED + "]");
+    //@TODO: Figure out how to make it work locally and when in OKE behind an Ingress...
+    prefixPath = "/apisconsiderations";
 
-    if (API_GW_ENABLED != null &&
-      API_GW_ENABLED != undefined &&
-      API_GW_ENABLED == "true") {
+    // console.log("API_GW_ENABLED is [" + API_GW_ENABLED + "]");
 
-      prefixPath = localConfig.API_GW_BASEURL;
+    // if (API_GW_ENABLED != null &&
+    //   API_GW_ENABLED != undefined &&
+    //   API_GW_ENABLED == "true") {
 
-      console.log("API_GW_ENABLED is set to 'true'. Setting API_GW_BASEURL [" + prefixPath + "]");
-    }
+    //   prefixPath = localConfig.API_GW_BASEURL;
+
+    //   console.log("API_GW_ENABLED is set to 'true'. Setting API_GW_BASEURL [" + prefixPath + "]");
+    // }
 
 
 
