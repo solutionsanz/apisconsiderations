@@ -26,20 +26,15 @@ var swaggerFileDef = "";
 //fs.writeFileSync(outputfile, JSON.stringify(swaggerFileDef, null, 2));
 
 
-/**
- * This project is a bit different as we need to load other Swagger specs. COmmenting this functionality that
- * is otherwise required in most microservices running behind an OKE Ingress service.
- */
+// Reading from local config variables and determining if SwaggerUI should be run within a Gateway, e.g. Traefix/Nginx/Amabassador/Other
+var data = 'localConfig = {"API_GW_ENABLED": "' + config.API_GW_ENABLED + '", "API_GW_BASEURL": "' + config.API_GW_BASEURL + '"};';
 
-// // Reading from local config variables and determining if SwaggerUI should be run within a Gateway, e.g. Traefix/Nginx/Amabassador/Other
-// var data = 'localConfig = {"API_GW_ENABLED": "' + config.API_GW_ENABLED + '", "API_GW_BASEURL": "' + config.API_GW_BASEURL + '"};';
+console.log("data is [" + data + "]");
 
-// console.log("data is [" + data + "]");
-
-// fs.writeFile('./swagger-dist/tempConfig.js', data, function (err, data) {
-//     if (err) console.log(err);
-//     console.log("Successfully written to file [swagger-dist/tempConfig.js]");
-// });
+fs.writeFile('./swagger-dist/tempConfig.js', data, function (err, data) {
+    if (err) console.log(err);
+    console.log("Successfully written to file [swagger-dist/tempConfig.js]");
+});
 
 
 

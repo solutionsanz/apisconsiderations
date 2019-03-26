@@ -249,7 +249,9 @@ window.onload = function () {
 
     console.log("Adding event on myIframe");
 
-    document.getElementById('myIframe').src = "/" + getAPISpec();
+    //@TODO: Figure out how to make it work locally and when in OKE behind an Ingress...
+    //document.getElementById('myIframe').src = "/" + getAPISpec();
+    document.getElementById('myIframe').src = "/apisconsiderations" + getAPISpec();
 }
 
 window.spec = "";

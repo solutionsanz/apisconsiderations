@@ -79,26 +79,25 @@
   <script src="./swagger-ui-bundle.js"> </script>
   <script src="./swagger-ui-standalone-preset.js"> </script>
 
-  <!-- script src="./tempConfig.js"> </script-->
+  <script src="./tempConfig.js"> </script>
 
   <script>
-    /**
-     * This project is a bit different as we need to load other Swagger specs. COmmenting this functionality that
-     * is otherwise required in most microservices running behind an OKE Ingress service.
-     */
-    // var API_GW_ENABLED = localConfig.API_GW_ENABLED;
+    var API_GW_ENABLED = localConfig.API_GW_ENABLED;
+
+
     var prefixPath = "";
+    //var prefixPath = "/apisconsiderations";
 
-    // console.log("API_GW_ENABLED is [" + API_GW_ENABLED + "]");
+    console.log("API_GW_ENABLED is [" + API_GW_ENABLED + "]");
 
-    // if (API_GW_ENABLED != null &&
-    //   API_GW_ENABLED != undefined &&
-    //   API_GW_ENABLED == "true") {
+    if (API_GW_ENABLED != null &&
+      API_GW_ENABLED != undefined &&
+      API_GW_ENABLED == "true") {
 
-    //   prefixPath = localConfig.API_GW_BASEURL;
+      prefixPath = localConfig.API_GW_BASEURL;
 
-    //   console.log("API_GW_ENABLED is set to 'true'. Setting API_GW_BASEURL [" + prefixPath + "]");
-    // }
+      console.log("API_GW_ENABLED is set to 'true'. Setting API_GW_BASEURL [" + prefixPath + "]");
+    }
 
 
 
