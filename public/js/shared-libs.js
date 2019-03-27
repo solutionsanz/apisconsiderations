@@ -16,129 +16,17 @@
   */
 
 
-function getAJoke() {
+function sendAPI() {
 
-    document.getElementById("newJoke").innerHTML = "Loading...";
-
-    // var server = "https://icanhazdadjoke.com";
-    var server = "https://apip.oracleau.cloud"
-    var uri = "/api/jokes/jokes"
-
-    var uri = server + uri; // Get a random joke
-
-    console.log("Within getAJoke uri is [" + uri + "]");
-
-    // Initiating XMLHttpRequest Object:
-    var http_request = initiateXMLHttpObject();
-
-    http_request.onreadystatechange = function () {
-
-        if (http_request.readyState == 4) {
-
-            console.log("http_request.responseText is [" + http_request.responseText + "]");
-
-
-            // Javascript function JSON.parse to parse JSON data
-            var jsonObj = JSON.parse(http_request.responseText);
-
-
-            // Refreshing Disabled Property values:			
-            var id = jsonObj.id;
-            var joke = jsonObj.joke;
-
-            console.log("id is [" + id + "] joke is [" + joke + "]");
-            document.getElementById("newJoke").innerHTML = joke;
-            document.getElementById("theOriginalJoke").innerHTML = joke;
-            document.getElementById("theJokeTBSent").innerHTML = joke;
-            document.getElementById("signUpForm").theOriginalJokeId.value = id;
-        }
-    }
-
-    sendRequest(http_request, "GET", uri, true);
-}
-
-
-function translateJoke() {
-
-    document.getElementById("theTranslatedJoke").innerHTML = "Loading...";
+    document.getElementById("sendAPILabel").innerHTML = "Sending...";
 
     // var server = "https://icanhazdadjoke.com";
-    var server = "https://apip.oracleau.cloud"
-    var apipUri = "/api/jokes/jokes/";
+    var server = API_GW_HOST;
+    var apipUri = API_GW_BASED_URI + "share";
 
-    //var server = "http://10.0.0.55:3000"
-    //var apipUri = "/jokes/";
-
-    var jokeId = document.getElementById("signUpForm").theOriginalJokeId.value;
-    var lang = document.getElementById("signUpForm").language.value;
-
-    if (jokeId == null || jokeId == undefined) {
-
-        console.assert.log("Critical error. Joke Id is null - cannot proceed.");
-        return;
-    }
-
-    if (lang == null || lang == undefined) {
-
-        console.assert.log("Critical error. Language is null - cannot proceed.");
-        return;
-    }
-
-    var uri = server + apipUri + jokeId + "/translate";
-    uri += "?language=" + lang;
-
-    console.log("Within translateJoke uri is [" + uri + "]");
-
-    // Initiating XMLHttpRequest Object:
-    var http_request = initiateXMLHttpObject();
-
-    http_request.onreadystatechange = function () {
-
-        if (http_request.readyState == 4) {
-
-            console.log("http_request.responseText is [" + http_request.responseText + "]");
-
-
-            // Javascript function JSON.parse to parse JSON data
-            var jsonObj = JSON.parse(http_request.responseText);
-
-
-            // Refreshing Disabled Property values:			
-            var id = jsonObj.id;
-            var joke = jsonObj.joke;
-
-            console.log("id is [" + id + "] joke is [" + joke + "]");
-            document.getElementById("theTranslatedJoke").innerHTML = joke;
-            document.getElementById("theJokeTBSent").innerHTML = joke;
-
-        }
-    }
-
-    sendRequest(http_request, "GET", uri, true);
-}
-
-function sendJoke() {
-
-    document.getElementById("sendJokeLabel").innerHTML = "Sending...";
-
-    // var server = "https://icanhazdadjoke.com";
-    var server = "https://lb.oracleau.cloud"
-    var apipUri = "/api/jokes/jokes/";
-
-    // var server = "http://10.0.0.55:3000"
-    // var apipUri = "/jokes/";
-
-    var jokeId = document.getElementById("signUpForm").theOriginalJokeId.value;
-    var lang = document.getElementById("signUpForm").language.value;
     var mobile = document.getElementById("signUpForm").mobile.value;
 
-    console.log("Within sendJoke, jokeId is [" + jokeId + "], lang is [" + lang + "] mobnile is [" + mobile + "]");
-
-    if (jokeId == null || jokeId == undefined) {
-
-        console.assert.log("Critical error. Joke Id is null - cannot proceed.");
-        return;
-    }
+    console.log("Within sendAPI, mobile is [" + mobile + "]");
 
     if (mobile == null || mobile == undefined) {
 
@@ -146,15 +34,11 @@ function sendJoke() {
         return;
     }
 
-    var uri = server + apipUri + jokeId;
-    uri += "?mobile=" + mobile;
-    uri += "&method=" + "sms";
+    var fullUri = server + apipUri;
+    fullUri += "?mobile=" + mobile;
 
-    if (lang != null && lang != undefined && lang != "") {
-        uri += "&language=" + lang;
-    }
 
-    console.log("Within sendJoke uri is [" + uri + "]");
+    console.log("Within sendAPI uri is [" + fullUri + "]");
 
     // Initiating XMLHttpRequest Object:
     var http_request = initiateXMLHttpObject();
@@ -165,22 +49,12 @@ function sendJoke() {
 
             console.log("http_request.responseText is [" + http_request.responseText + "]");
 
-
-            // Javascript function JSON.parse to parse JSON data
-            var jsonObj = JSON.parse(http_request.responseText);
-
-
-            // Refreshing Disabled Property values:			
-            var id = jsonObj.id;
-            var joke = jsonObj.joke;
-
-            document.getElementById("sendJokeLabel").innerHTML = "Sent!";
-            console.log("id is [" + id + "] joke is [" + joke + "]");
+            document.getElementById("sendAPILabel").innerHTML = "Sent!";
 
         }
     }
 
-    sendRequest(http_request, "POST", uri, true);
+    sendRequest(http_request, "POST", fullUri, true);
 }
 
 function sendRequest(http_request, verb, uri, async) {
