@@ -250,13 +250,17 @@ window.onload = function () {
     console.log("Adding event on myIframe");
 
     //@TODO: Figure out how to make it work locally and when in OKE behind an Ingress...
-    //document.getElementById('myIframe').src = "/" + getAPISpec();
-    document.getElementById('myIframe').src = "/apisconsiderations" + getAPISpec();
+    // document.getElementById('myIframe').src = "/" + getAPISpec();    
+    // document.getElementById('myIframe').src = window.location.protocol + "//" + window.location.hostname + ":3000" + "/" + getAPISpec();
+    // document.getElementById('myIframe').src = window.location.protocol + "//" + window.location.hostname + "/apisconsiderations/" + getAPISpec();
+    document.getElementById('myIframe').src = "https://api.opcau.com/apisconsiderations/" + getAPISpec();
 }
 
 window.spec = "";
 
 function getAPISpec() {
+
+    console.log("Current vbalue of window.spec is [" + window.spec + "]");
 
     if (window.spec != undefined && window.spec != null && window.spec != "") {
         return window.spec;
