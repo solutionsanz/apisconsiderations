@@ -38,24 +38,13 @@ module.exports = function (app) {
         var recipientMobile = req.query.mobile;
         var message = "a friend wants to share this website with you: https://goautonomous.cloud";
 
-        if (recipientName == null || recipientName == undefined) {
-            log("POST", "/services/:service/notification", "recipientName is empty or invalid.");
-            res.status(400).end(); //Bad request...
-            return;
-        }
         if (recipientMobile == null || recipientMobile == undefined) {
             log("POST", "/services/:service/notification", "recipientMobile is empty or invalid.");
             res.status(400).end(); //Bad request...
             return;
         }
-        if (message == null || message == undefined) {
-            log("POST", "/services/:service/notification", "message is empty or invalid.");
-            res.status(400).end(); //Bad request...
-            return;
-        }
 
-
-        log("POST", "/share", "Sharing message with [" + recipientName + ", " + recipientMobile + "]");
+        log("POST", "/share", "Sharing message with [" + recipientMobile + "]");
 
         var fullMessage = "Hi, " + message;
 
