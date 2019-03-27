@@ -244,8 +244,12 @@ function getAPISynch(repid) {
     return customername;
 }
 
+var API_GW_HOST = "";
+var API_GW_BASED_URI = "";
 
 window.onload = function () {
+
+
 
     console.log("Adding event on myIframe");
 
@@ -253,14 +257,24 @@ window.onload = function () {
     // document.getElementById('myIframe').src = "/" + getAPISpec();    
     // document.getElementById('myIframe').src = window.location.protocol + "//" + window.location.hostname + ":3000" + "/" + getAPISpec();
     // document.getElementById('myIframe').src = window.location.protocol + "//" + window.location.hostname + "/apisconsiderations/" + getAPISpec();
-    document.getElementById('myIframe').src = "https://api.opcau.com/apisconsiderations/" + getAPISpec();
+
+    API_GW_HOST = "https://api.opcau.com";
+    API_GW_BASED_URI = "/apisconsiderations/";
+
+
+    // document.getElementById('myIframe').src = API_GW_HOST + API_GW_BASED_URI + getAPISpec();\
+    var fullURLToLoad = API_GW_HOST + API_GW_BASED_URI + getAPISpec();
+
+    console.log("FUll URL to load is [" + fullURLToLoad + "]");
+
+    document.getElementById('myIframe').src = fullURLToLoad
 }
 
 window.spec = "";
 
 function getAPISpec() {
 
-    console.log("Current vbalue of window.spec is [" + window.spec + "]");
+    console.log("Current value of window.spec is [" + window.spec + "]");
 
     if (window.spec != undefined && window.spec != null && window.spec != "") {
         return window.spec;
@@ -337,7 +351,15 @@ function setSecurity() {
     console.log("URI to call is [" + uri + "]");
 
 
-    document.getElementById('myIframe').src = "/" + uri;
+    var fullURLToLoad = API_GW_HOST + API_GW_BASED_URI + uri;
+
+    console.log("In Security, full URL to load is [" + fullURLToLoad + "]");
+
+
+    //document.getElementById('myIframe').src = "/" + uri;    
+    document.getElementById('myIframe').src = fullURLToLoad;
+
+
 
 }
 
@@ -367,6 +389,14 @@ function setReadOnly() {
 
     console.log("URI to call is [" + uri + "]");
 
-    document.getElementById('myIframe').src = "/" + uri;
+
+    var fullURLToLoad = API_GW_HOST + API_GW_BASED_URI + uri;
+
+    console.log("In Read Only, full URL to load is [" + fullURLToLoad + "]");
+
+
+
+    // document.getElementById('myIframe').src = "/" + uri;
+    document.getElementById('myIframe').src =fullURLToLoad;
 
 }
